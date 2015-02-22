@@ -1,0 +1,20 @@
+{
+  "name": "followSorter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^2.9.12",
+    "body-parser": "^1.12.0",
+    "dotenv": "^0.5.1",
+    "express": "^4.11.2",
+    "heap": "^0.2.6",
+    "morgan": "^1.5.1",
+    "twit": "^1.1.20"
+  }
+}
