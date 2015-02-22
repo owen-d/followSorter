@@ -1,2 +1,5 @@
 # Users Environment Variables
 .env
+
+#node modules
+node_modules/
