@@ -1,3 +1,11 @@
+/* 
+
+WARNING: UNFINISHED.
+-It appears that twitter has some anti-crawling strategies implemented and bulk requests get throttled. Therefore, I have stopped working on this approach.
+
+*/
+
+
 var trumpet = require('trumpet');
 // var request = require('request');
 var hyperquest = require('hyperquest');
@@ -11,9 +19,10 @@ module.exports = function(users) {
   while (count < 5) {
     var path = 'https://twitter.com/intent/user?user_id='+users.pop();
     var tr = trumpet();
-    tr.select('dt + dd a', function(followersEle){
-      console.log(followersEle);
-      followersEle.createReadStream().pipe(process.stdout);
+    tr.select('body', function(body){
+      // console.log(body);
+      console.log(body);
+      // followersEle.createReadStream().pipe(process.stdout);
     });
     // console.log(path);
     var req = hyperquest(path);

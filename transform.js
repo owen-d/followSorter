@@ -1,4 +1,3 @@
-var babyparse = require('babyparse');
 var Heap = require('heap');
 var Stream = require('stream');
 var fs = require('fs');
