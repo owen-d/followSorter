@@ -3,6 +3,7 @@ var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var transform = require('../transform');
 var OAuth = require('oauth');
+var crawl = require('../crawler');
 
 var screenName = process.env.SCREEN_NAME;
 var THREE_MINUTES_IN_MS = 1000 * 60 * 3;
@@ -44,12 +45,11 @@ var recursiveSearch = function(err, data, response){
     console.log('counted so far:', counted);
     lastCursor = data['next_cursor_str'];
     console.log('lastCursor:', lastCursor);
-    //add tuple with user name & follower count to our users array
     users = users.concat(data.ids);
 
     if (lastCursor === '0') {
-      // transform(users);
       console.log('end of users!!!');
+      crawl(users);
     } else {
       sendRequest();
     }
