@@ -41,15 +41,19 @@ var recursiveSearch = function(err, data, response){
 
   } else {
     data = JSON.parse(data);
-    counted+= data.ids.length;
+    counted+= data.users.length;
     console.log('counted so far:', counted);
+
     lastCursor = data['next_cursor_str'];
     console.log('lastCursor:', lastCursor);
-    users = users.concat(data.ids);
+    
+    users = users.concat(data.users.map(function(item){
+      return {handle: item.screen_name, followers: item.followers_count};
+    }));
 
     if (lastCursor === '0') {
       console.log('end of users!!!');
-      crawl(users);
+      transform(users);
     } else {
       sendRequest();
     }
@@ -60,7 +64,7 @@ var recursiveSearch = function(err, data, response){
 
 function sendRequest (){
   oa.get(
-    'https://api.twitter.com/1.1/followers/ids.json?screen_name='+screenName+'&cursor='+lastCursor,
+    'https://api.twitter.com/1.1/followers/list.json?screen_name='+screenName+'&cursor='+lastCursor,
     process.env.TWIT_ACCESS_TOKEN,
     process.env.TWIT_TOKEN_SECRET,
     recursiveSearch
