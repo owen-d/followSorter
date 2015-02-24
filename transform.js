@@ -35,10 +35,11 @@ module.exports = function(users){
     }]
   };
 
-  var output = fs.createWriteStream('output.csv', {encoding: 'utf8'});
+  var output = fs.createWriteStream(process.env.OUTPUT_FILE, {encoding: 'utf8'});
   readStream.pipe(jsoncsv.csv(csvOptions)).pipe(output);
   output.on('finish', function(){
     console.log('Finished writing to csv.');
+    process.exit();
   });
 };
 
